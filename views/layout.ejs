@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  <div id="page-wrap">
+  <div id="page-wrap" class="clearfix">
       <header class="main">
           <h1>Quiz: <span>el juego de las preguntas</span></h1>
       </header>
@@ -15,10 +15,11 @@
               <ul>
                   <li><a href="/">Inicio</a></li>
                   <li><a href="/quizes/question">Preguntas</a></li>
+                  <li><a href="/author">Créditos</a></li>
               </ul>
           </nav>
       </sidebar>
-      <section class="main" role="main">
+      <section class="main clearfix" role="main">
           <!-- Llamad a vistas -->
           <%- body %>
       </section>
