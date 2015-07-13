@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var partials = require('express-partials');
 
 var routes = require('./routes/index');
 
@@ -13,6 +14,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//Usamos las vistas parciales para incluir headers y footers comúnes
+app.use(partials());
+
+/*Es más rápido generar el html directamente en las vistas. Además habrá otros favicon para dispositivos.*/
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -23,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+/*Gestiona los errores de enrutamiento en fase de desarrollo y producción*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -32,11 +38,13 @@ app.use(function(req, res, next) {
 
 // error handlers
 
+/*Middelware que gestiona los errores de enrutamiento en fase de desarrollo. Muestra mucho más información que en producción.*/
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    /*Invoca la vista de error error.ejs y le pasa dos variables.*/
     res.render('error', {
       message: err.message,
       error: err
@@ -44,15 +52,17 @@ if (app.get('env') === 'development') {
   });
 }
 
+/*Middelware que gestiona los errores de enrutamiento en fase de producción*/
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+    /*Invoca la vista de error error.ejs y le pasa dos variables.*/
   res.render('error', {
     message: err.message,
     error: {}
   });
 });
 
-
+/*exportar app para comando de arranque en bin/www */
 module.exports = app;

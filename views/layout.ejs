@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <div id="wrap">
+      <header class="main">
+          <h1>Quiz: el juego de las preguntas</h1>
+          <nav class="main" id="n1" role="navigation">
+              <ul>
+                  <li><a href="/">Inicio</a></li>
+                  <li><a href="/quizes/question">Preguntas</a></li>
+              </ul>
+          </nav>
+      </header>
+      <section class="main" role="main">
+          <!-- Llamad a vistas -->
+          <%- body %>
+      </section>
+      <footer class="main">
+          <a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">¿Que es un Quiz?</a>
+      </footer>
+  </div>
+  </body>
+</html>
